@@ -46,6 +46,8 @@ import ru.orangesoftware.financisto2.export.drive.DriveConnectionFailed;
 import ru.orangesoftware.financisto2.export.drive.DriveFileInfo;
 import ru.orangesoftware.financisto2.export.drive.DriveFileList;
 import ru.orangesoftware.financisto2.export.drive.DriveRestoreSuccess;
+import ru.orangesoftware.financisto2.export.sync.ApiServiceFactory;
+import ru.orangesoftware.financisto2.export.sync.ApiSyncService;
 import ru.orangesoftware.financisto2.export.sync.ApiSyncTask;
 import ru.orangesoftware.financisto2.utils.EntityEnum;
 import ru.orangesoftware.financisto2.utils.EnumUtils;
@@ -351,7 +353,8 @@ public class BackupRestoreListActivity extends ListActivity {
     }
 
     private void doSync() {
-        new ApiSyncTask(this).execute();
+        ApiSyncService syncService = ApiServiceFactory.createService(ApiSyncService.class);
+        new ApiSyncTask(this, syncService).execute();
     }
 
 }

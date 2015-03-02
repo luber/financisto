@@ -20,16 +20,20 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.util.List;
+
 import ru.orangesoftware.financisto2.R;
 import ru.orangesoftware.financisto2.activity.FlowzrSyncActivity;
 import ru.orangesoftware.financisto2.db.DatabaseAdapter;
 import ru.orangesoftware.financisto2.db.DatabaseAdapter_;
+import ru.orangesoftware.financisto2.model.Currency;
 //import ru.orangesoftware.financisto2.export.flowzr.FlowzrSyncEngine;
 //import ru.orangesoftware.financisto2.export.flowzr.FlowzrSyncOptions;
 
 public class ApiSyncTask extends AsyncTask<String, String, Object> {
 	protected final Context context;
-//    private final FlowzrSyncOptions options;
+    private ApiSyncService syncService;
+    //    private final FlowzrSyncOptions options;
 //    private final DefaultHttpClient http_client;
 //    private final FlowzrSyncActivity flowzrSyncActivity;
 //    FlowzrSyncEngine flowzrSync;
@@ -37,8 +41,8 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
 	public static final String TAG = "apiSync";
 
 
-    public ApiSyncTask(Activity context
-//            ,
+    public ApiSyncTask(Activity context,
+                       ApiSyncService syncService
 //            FlowzrSyncActivity flowzrSyncActivity,
 //                       FlowzrSyncEngine _flowzrSyncEngine,
 //                       FlowzrSyncOptions options,
@@ -47,6 +51,7 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
 //        this.options = options;
 //        this.http_client=pHttp_client;
         this.context=context;
+        this.syncService = syncService;
 //        this.flowzrSyncActivity=flowzrSyncActivity;
 //        this.flowzrSync=_flowzrSyncEngine;
 
@@ -75,6 +80,12 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
     	DatabaseAdapter db = DatabaseAdapter_.getInstance_(context);
 
         try {
+            List<Currency> currencies = db.getAllCurrenciesList();
+            for (Currency currency : currencies){
+                syncService.createCurrency(currency);
+            }
+
+            List<Currency> currencyList = syncService.listCurrencies();
 //    		flowzrSyncActivity.notifyUser(flowzrSyncActivity.getString(R.string.flowzr_sync_auth_inprogress), 30);
 //            if (this.checkSubscriptionFromWeb()) {
 //    			flowzrSync.doSync();
