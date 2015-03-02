@@ -917,5 +917,6 @@
     <string name="google_drive_connection_resolved">Connection resolved. Please try the last operation again...</string>
     <string name="google_drive_connection_failed">Unable to connect to Google Drive:\n%s</string>
     <string name="google_drive_backup_success">Backup success on Google Drive: %s</string>
+    <string name="sync">Syncronize</string>
 
 </resources>

@@ -708,8 +708,9 @@
   <string name="flowzr_account_setup">Учетная запись добавлена, пожалуйса перезапустите синхронизацию.</string>
   <string name="flowzr_subscription_required">Требуется подписка.</string>
   <string name="flowzr_terms_of_use">&lt;b&gt;Платная подписка&lt;/b&gt; необходима для пользования сервисом синхонизации Flowzr. Подписку можно бесплатно отменить в течении &lt;b&gt;14 дней&lt;/b&gt; пробного периода. Flowzr является сторонним сервисом, не связанным с Financisto. Используя этот сервис Вы соглашаетесь с Flowzr &lt;a href="http://www.flowzr.com/static/en/mobile/privacypolicy.html"&gt;Политикой безопасности&lt;/a&gt; и &lt;a href="http://www.flowzr.com/static/en/mobile/tos.html"&gt;Правилами пользования&lt;/a&gt;.</string>
+  <string name="sync">Синхронизация</string>
   <string-array name="attribute_types">
-  <item>Текст</item>
+    <item>Текст</item>
     <item>Число</item>
     <item>Список</item>
     <item>Флажок</item>

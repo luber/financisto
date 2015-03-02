@@ -31,8 +31,8 @@ import java.util.*;
  */
 public class Dropbox {
 
-    public static final String APP_KEY = "INSERT_APP_KEY_HERE";
-    public static final String APP_SECRET = "INSERT_APP_SECRET_HERE";
+    public static final String APP_KEY = "mf2fp8rvt8wvvbd";
+    public static final String APP_SECRET = "jru0v69j9krfnw1";
     public static final Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
 
     private final Context context;

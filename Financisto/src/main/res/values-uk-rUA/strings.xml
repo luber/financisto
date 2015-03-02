@@ -695,6 +695,7 @@
   <string name="show_currency">Показати валюту</string>
   <string name="show_currency_summary">Показувати вибір валюти у екрані нової транзакції</string>
   <string name="reconcile">Узгодити</string>
+  <string name="sync">Синхронізація</string>
   <string-array name="attribute_types">
     <item>Текст</item>
     <item>Номер</item>

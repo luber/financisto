@@ -46,6 +46,7 @@ import ru.orangesoftware.financisto2.export.drive.DriveConnectionFailed;
 import ru.orangesoftware.financisto2.export.drive.DriveFileInfo;
 import ru.orangesoftware.financisto2.export.drive.DriveFileList;
 import ru.orangesoftware.financisto2.export.drive.DriveRestoreSuccess;
+import ru.orangesoftware.financisto2.export.sync.ApiSyncTask;
 import ru.orangesoftware.financisto2.utils.EntityEnum;
 import ru.orangesoftware.financisto2.utils.EnumUtils;
 
@@ -247,7 +248,13 @@ public class BackupRestoreListActivity extends ListActivity {
     }
 
     private enum Entity implements EntityEnum {
-
+        SYNC(R.string.sync, R.drawable.ic_menu_refresh){
+            @Override
+            public void startActivity(BackupRestoreListActivity context) {
+//                FlowzrSyncActivity_.intent(context).start();
+                context.doSync();
+            }
+        },
         BACKUP(R.string.backup_database, R.drawable.backup_file){
             @Override
             public void startActivity(BackupRestoreListActivity context) {
@@ -341,6 +348,10 @@ public class BackupRestoreListActivity extends ListActivity {
 
         public abstract void startActivity(BackupRestoreListActivity context);
 
+    }
+
+    private void doSync() {
+        new ApiSyncTask(this).execute();
     }
 
 }
