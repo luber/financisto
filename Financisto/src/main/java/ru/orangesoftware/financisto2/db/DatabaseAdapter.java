@@ -1761,6 +1761,5 @@ public class DatabaseAdapter extends MyEntityManager {
         row.put(deleteLogColumns.DELETED_ON, System.currentTimeMillis());
         return db().insert(DELETE_LOG_TABLE, null, row);
     }
-
 }
 

@@ -120,7 +120,7 @@ public abstract class EntityManager {
 		long id = ed.getId(entity);
 		values.remove("updated_on");
 		values.put("updated_on", System.currentTimeMillis());			
-		if (id <= 0) {
+		if (id <= 0 || !exists(entity.getClass(), id)) {
 			values.remove(ed.idField.columnName);		
 			id = db.insertOrThrow(ed.tableName, null, values);
             ed.setId(entity, id);
@@ -128,10 +128,14 @@ public abstract class EntityManager {
 		} else {
 			values.remove("updated_on");
 			values.put("updated_on", System.currentTimeMillis());
-			db.update(ed.tableName, values, ed.idField.columnName+"=?", new String[]{String.valueOf(id)});
+            db.update(ed.tableName, values, ed.idField.columnName+"=?", new String[]{String.valueOf(id)});
 			return id;
 		}
 	}
+
+    private boolean exists(Class<? extends Object> aClass, Object id) {
+        return get(aClass, id) != null;
+    }
 
     public long reInsert(Object entity) {
         if (entity == null) {
@@ -286,5 +290,22 @@ public abstract class EntityManager {
 	public <T> Query<T> createQuery(Class<T> clazz) {
 		return new Query<T>(this, clazz);
 	}
+
+    public long getLocalKey(String tableName, String remoteKey) {
+        Cursor c = db().query(tableName, new String[] { "_id" }, "remote_key = ?",
+                new String[]{ remoteKey }, null, null, null, null);
+
+        try {
+            if (c.moveToFirst()) {
+                long l = c.getLong(0);
+                return l;
+            }else {
+                return -1;
+            }
+        }
+        finally {
+            c.close();
+        }
+    }
 
 }
