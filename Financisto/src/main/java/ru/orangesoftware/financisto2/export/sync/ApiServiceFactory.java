@@ -8,7 +8,7 @@ import retrofit.RestAdapter;
 public class ApiServiceFactory {
     private ApiServiceFactory(){};
 
-    private static String API_BASE_URL = "http://banan/Financisto.Api";
+    private static String API_BASE_URL = "http://kampot/Financisto.Api";
 
     private static RestAdapter restAdapter = new RestAdapter.Builder()
             .setEndpoint(API_BASE_URL)
