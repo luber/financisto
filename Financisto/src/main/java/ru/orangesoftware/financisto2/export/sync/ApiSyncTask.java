@@ -12,15 +12,15 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import org.androidannotations.annotations.sharedpreferences.Pref;
-
 import java.util.List;
 
+import retrofit.ResponseCallback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import ru.orangesoftware.financisto2.R;
 import ru.orangesoftware.financisto2.db.DatabaseAdapter;
 import ru.orangesoftware.financisto2.db.DatabaseAdapter_;
@@ -37,7 +37,8 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
     long startTimestamp=-1; //useful only for not pushing what have just been pooled
 
 	protected final Context context;
-    private ApiSyncService syncService;
+    private static ApiSyncService apiSyncService;
+    private static ApiAuthService apiAuthService;
     //    private final FlowzrSyncOptions options;
 //    private final DefaultHttpClient http_client;
 //    private final FlowzrSyncActivity flowzrSyncActivity;
@@ -46,8 +47,8 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
 	public static final String TAG = "apiSync";
 
 
-    public ApiSyncTask(Activity context,
-                       ApiSyncService syncService
+    public ApiSyncTask(Activity context
+//            ,ApiSyncService syncService
 //            FlowzrSyncActivity flowzrSyncActivity,
 //                       FlowzrSyncEngine _flowzrSyncEngine,
 //                       FlowzrSyncOptions options,
@@ -56,10 +57,12 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
 //        this.options = options;
 //        this.http_client=pHttp_client;
         this.context=context;
-        this.syncService = syncService;
+//        this.syncService = syncService;
         this.dba = DatabaseAdapter_.getInstance_(context);
 //        this.flowzrSyncActivity=flowzrSyncActivity;
 //        this.flowzrSync=_flowzrSyncEngine;
+
+        this.apiAuthService = ApiServiceFactory.createService(ApiAuthService.class);
 
         mProgress = new ProgressDialog(this.context);
         mProgress.setIcon(R.drawable.icon);
@@ -90,6 +93,13 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
 
         startTimestamp = System.currentTimeMillis();
 
+        //TODO: use refresh tokens
+        //TODO: cache accessToke somewhere
+        AccessToken accessToken = apiAuthService.getAccessToken(ApiAuthService.API_CLIENT_ID, ApiAuthService.API_CLIENT_SECRET,
+                        "password", "test@test.com", "mp3mp3");
+
+        ApiSyncService syncService = ApiServiceFactory.createService(ApiSyncService.class, accessToken);
+
         try {
 /*
             if (last_sync_ts == 0){ //initial sync
@@ -105,23 +115,28 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
 //TODO
 
                 //pull updated objects after last_sync_ts
-                publishProgress("Downloading currencies...", "5");
-                List<Currency> currencyList = syncService.listCurrencies(last_sync_ts);
+                publishProgress("Downloading currencies...", "1");
+                List<Currency> currencyList = syncService.getLastSyncCurrencies(last_sync_ts);
                 for (Currency c : currencyList){
                     db.saveOrUpdate(c);
                 }
-                publishProgress("Downloading currencies...", "95");
+                publishProgress("Downloading currencies...", "5");
 
-                publishProgress("Uploading currencies...", "5");
+                publishProgress("Uploading currencies...", "6");
                 List<Currency> currencies = db.getAllCurrenciesList();
                 for (Currency currency : currencies){
+                    if (currency.updatedOn > startTimestamp) //skip entities changed after sync started
+                        continue;
+
                     if (currency.remoteKey == null) {
                         Currency updatedCurrency = syncService.createCurrency(currency);
-                        db.saveOrUpdate(updatedCurrency);
-                    } else
-                        syncService.updateCurrency(currency.id, currency);
+                        db.saveOrUpdate(updatedCurrency); //save remoteKey
+                    } else {
+                        long currencyRemoteId = Long.parseLong(currency.remoteKey);
+                        syncService.updateCurrency(currencyRemoteId, currency);
+                    }
                 }
-                publishProgress("Uploading currencies...", "95");
+                publishProgress("Uploading currencies...", "10");
 
                 //push created objects after last_sync_ts
 
@@ -135,7 +150,8 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
             editor.apply();
 
             return null;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             return e;
         }
     }
@@ -198,11 +214,12 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
     
 	@Override
 	protected void onPostExecute(Object result) {
+        mProgress.dismiss();
 //        flowzrSync.finishDelete();
 //        flowzrSyncActivity.setReady();
-        if (!(result instanceof Exception)) {
+        if (!(result instanceof ApiUnauthorizedException)) {
 //            flowzrSyncActivity.nm.cancel(FlowzrSyncActivity.NOTIFICATION_ID);
-            mProgress.hide();
+//            mProgress.hide();
         }
     }
 }

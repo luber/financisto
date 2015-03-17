@@ -353,8 +353,7 @@ public class BackupRestoreListActivity extends ListActivity {
     }
 
     private void doSync() {
-        ApiSyncService syncService = ApiServiceFactory.createService(ApiSyncService.class);
-        new ApiSyncTask(this, syncService).execute();
+        new ApiSyncTask(this).execute();
     }
 
 }
