@@ -1,3 +1,5 @@
+The purpouse of this branch to develop the Dashboard view (and allow user to set it as start view via settings). The Dashboard view should be similar to this: https://play.google.com/store/apps/details?id=ru.easyfinance.budget
+
 **! Please note that the branch is currently UNSTABLE due to migrating to Holo !**
 
 # Financisto
