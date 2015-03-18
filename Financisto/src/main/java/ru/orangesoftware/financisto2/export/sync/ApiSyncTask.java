@@ -18,9 +18,6 @@ import android.util.Log;
 
 import java.util.List;
 
-import retrofit.ResponseCallback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 import ru.orangesoftware.financisto2.R;
 import ru.orangesoftware.financisto2.db.DatabaseAdapter;
 import ru.orangesoftware.financisto2.db.DatabaseAdapter_;
@@ -116,7 +113,7 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
 
                 //pull updated objects after last_sync_ts
                 publishProgress("Downloading currencies...", "1");
-                List<Currency> currencyList = syncService.getLastSyncCurrencies(last_sync_ts);
+                List<Currency> currencyList = syncService.getChangedOrAddedCurrencies(last_sync_ts);
                 for (Currency c : currencyList){
                     db.saveOrUpdate(c);
                 }

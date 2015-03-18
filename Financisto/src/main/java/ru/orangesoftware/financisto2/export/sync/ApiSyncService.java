@@ -13,7 +13,10 @@ import ru.orangesoftware.financisto2.model.Currency;
 public interface ApiSyncService {
     // "/api/sync/Currencies?lastSync=0"
     @GET("/api/sync/currencies")
-    List<Currency> getLastSyncCurrencies(@Query("lastSync") long lastSync);
+    List<Currency> getChangedOrAddedCurrencies(@Query("lastSync") long lastSync);
+
+    @GET("/api/sync/currencies/removed")
+    List<Currency> getRemovedCurrencies(@Query("lastSync") long lastSync);
 
     @GET("/api/sync/currencies/{id}")
     Currency getCurrency(@Path("id") long id);
