@@ -681,4 +681,23 @@ class MyEntityManager extends EntityManager {
         }
         return array;
     }
+
+    public List<String> getDeletedRemoteKeys(String tableName, long lastSync){
+        List<String> resultList = new ArrayList<String>();
+        Cursor resultCursor = db()
+                .query(DatabaseHelper.DELETE_LOG_TABLE,
+                        new String[]{DatabaseHelper.deleteLogColumns.REMOTE_KEY},
+                        DatabaseHelper.deleteLogColumns.TABLE_NAME + "=? AND " + DatabaseHelper.deleteLogColumns.DELETED_ON + ">=?",
+                        new String[]{tableName, String.valueOf(lastSync)}, null, null, null);
+        try {
+            resultCursor.moveToFirst();
+            while (!resultCursor.isAfterLast()){
+                resultList.add(resultCursor.getString(0));
+                resultCursor.moveToNext();
+            }
+        }finally {
+            resultCursor.close();
+        }
+        return resultList;
+    }
 }

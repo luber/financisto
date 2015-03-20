@@ -19,14 +19,18 @@ public interface ApiSyncService {
     List<Currency> getRemovedCurrencies(@Query("lastSync") long lastSync);
 
     @GET("/api/sync/currencies/{id}")
-    Currency getCurrency(@Path("id") long id);
+    Currency getCurrency(@Path("id") String id);
 
     @POST("/api/sync/currencies")
     Currency createCurrency(@Body Currency currency);
 
     @PUT("/api/sync/currencies/{id}")
-    Response updateCurrency(@Path("id") long id, @Body Currency currency);
+    Response updateCurrency(@Path("id") String id, @Body Currency currency);
 
     @DELETE("/api/sync/currencies/{id}")
-    void deleteCurrency(@Path("id") long id, Callback<Response> callback);
+    Response deleteCurrency(@Path("id") String id);
+
+    @DELETE("/api/sync/currencies")
+    Response deleteCurrencies(@Body List<String> ids);
+
 }

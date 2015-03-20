@@ -83,8 +83,6 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
 
     @Override
 	protected Object doInBackground(String... params) {
-    	DatabaseAdapter db = DatabaseAdapter_.getInstance_(context);
-
         final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         last_sync_ts = pref.getLong(LAST_API_SYNC_TIMESTAMP, 0);
 
@@ -98,47 +96,46 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
         ApiSyncService syncService = ApiServiceFactory.createService(ApiSyncService.class, accessToken);
 
         try {
-/*
-            if (last_sync_ts == 0){ //initial sync
-                //download everything from server
-
-            }else{ //sequential sync
-*/
-
-                //pull deleted objects after last_sync_ts
-                //TODO
+            //pull deleted objects after last_sync_ts
+            publishProgress("Puling removed currencies...", "1");
+            List<Currency> currenciesRemovedOnServer = syncService.getRemovedCurrencies(last_sync_ts);
+            for (Currency c : currenciesRemovedOnServer){
+                long id = dba.getLocalKey(DatabaseHelper.CURRENCY_TABLE, c.remoteKey);
+                dba.deleteCurrency(id);
+            }
+            publishProgress("Puling removed currencies...", "5");
 
                 //push deleted objects after last_sync_ts
-//TODO
-
-                //pull updated objects after last_sync_ts
-                publishProgress("Downloading currencies...", "1");
-                List<Currency> currencyList = syncService.getChangedOrAddedCurrencies(last_sync_ts);
-                for (Currency c : currencyList){
-                    db.saveOrUpdate(c);
-                }
-                publishProgress("Downloading currencies...", "5");
-
-                publishProgress("Uploading currencies...", "6");
-                List<Currency> currencies = db.getAllCurrenciesList();
-                for (Currency currency : currencies){
-                    if (currency.updatedOn > startTimestamp) //skip entities changed after sync started
-                        continue;
-
-                    if (currency.remoteKey == null) {
-                        Currency updatedCurrency = syncService.createCurrency(currency);
-                        db.saveOrUpdate(updatedCurrency); //save remoteKey
-                    } else {
-                        long currencyRemoteId = Long.parseLong(currency.remoteKey);
-                        syncService.updateCurrency(currencyRemoteId, currency);
-                    }
-                }
-                publishProgress("Uploading currencies...", "10");
-
-                //push created objects after last_sync_ts
-
-                //push updated objects after last_sync_ts
+            publishProgress("Pushing removed currencies...", "1");
+            List<String> removedCurrenciesRemoteKeys = dba.getDeletedRemoteKeys(DatabaseHelper.CURRENCY_TABLE, last_sync_ts);
+            apiSyncService.deleteCurrencies(removedCurrenciesRemoteKeys);
+//            for (String remoteKey : removedCurrenciesRemoteKeys){
+//                apiSyncService.deleteCurrency(remoteKey);
 //            }
+            publishProgress("Pushing removed currencies...", "5");
+
+            //pull updated objects after last_sync_ts
+            publishProgress("Downloading currencies...", "6");
+            List<Currency> currencyList = syncService.getChangedOrAddedCurrencies(last_sync_ts);
+            for (Currency c : currencyList){
+                dba.saveOrUpdate(c);
+            }
+            publishProgress("Downloading currencies...", "10");
+
+            publishProgress("Uploading currencies...", "11");
+            List<Currency> currencies = dba.getAllCurrenciesList();
+            for (Currency currency : currencies){
+                if (currency.updatedOn > startTimestamp) //skip entities changed after sync started
+                    continue;
+
+                if (currency.remoteKey == null) {
+                    Currency updatedCurrency = syncService.createCurrency(currency);
+                    dba.saveOrUpdate(updatedCurrency); //save remoteKey
+                } else {
+                    syncService.updateCurrency(currency.remoteKey, currency);
+                }
+            }
+            publishProgress("Uploading currencies...", "15");
 
 //            last_sync_ts = startTimestamp;
 
