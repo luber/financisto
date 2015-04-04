@@ -101,14 +101,16 @@ public class ApiSyncTask extends AsyncTask<String, String, Object> {
             List<Currency> currenciesRemovedOnServer = syncService.getRemovedCurrencies(last_sync_ts);
             for (Currency c : currenciesRemovedOnServer){
                 long id = dba.getLocalKey(DatabaseHelper.CURRENCY_TABLE, c.remoteKey);
-                dba.deleteCurrency(id);
+                if (id > 0)
+                    dba.deleteCurrency(id);
             }
             publishProgress("Puling removed currencies...", "5");
 
                 //push deleted objects after last_sync_ts
             publishProgress("Pushing removed currencies...", "1");
             List<String> removedCurrenciesRemoteKeys = dba.getDeletedRemoteKeys(DatabaseHelper.CURRENCY_TABLE, last_sync_ts);
-            apiSyncService.deleteCurrencies(removedCurrenciesRemoteKeys);
+            if (removedCurrenciesRemoteKeys.size() > 0)
+                apiSyncService.deleteCurrencies(removedCurrenciesRemoteKeys);
 //            for (String remoteKey : removedCurrenciesRemoteKeys){
 //                apiSyncService.deleteCurrency(remoteKey);
 //            }
