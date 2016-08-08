@@ -4,7 +4,7 @@
  * are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * <p/>
+ * <p>
  * Contributors:
  * Denis Solonenko - initial API and implementation
  ******************************************************************************/
@@ -402,8 +402,9 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         //Checking if the item is in checked state or not, if not make it in checked state
-        if (menuItem.isChecked()) menuItem.setChecked(false);
-        else menuItem.setChecked(true);
+        if (menuItem.isCheckable()) {
+            menuItem.setChecked(true);
+        }
 
         //Closing drawer on item click
         mDrawerLayout.closeDrawers();
