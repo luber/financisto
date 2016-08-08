@@ -1,0 +1,1 @@
+ALTER TABLE account ADD COLUMN is_use_sms_parser integer not null default 0;

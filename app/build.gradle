@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 'Google Inc.:Google APIs:23'
+    buildToolsVersion '23.0.1'
+    defaultConfig {
+        applicationId "ru.orangesoftware.financisto"
+        minSdkVersion 21
+        targetSdkVersion 24
+        multiDexEnabled true
+        testApplicationId "ru.orangesoftware.financisto.tests"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+        versionCode 90
+        versionName '1.6.7'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    //    compile 'com.android.support:support-v4:21.0.0'
+    //    compile 'commons-logging:commons-logging:1.2'
+    //    compile 'com.dropbox.core:dropbox-core-sdk:1.7.7'
+//    compile files('libs/dropbox-android-sdk-1.6.3.jar')
+    compile files('libs/json_simple-1.1 2.jar')
+    compile files('libs/cwac-wakeful-1.0.5.jar')
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.google.android.gms:play-services:9.4.0'
+    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:design:24.1.1'
+    compile 'com.android.support:recyclerview-v7:24.1.1'
+    compile 'com.android.support:percent:24.1.1'
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.google.api-client:google-api-client:1.20.0'
+    compile 'com.google.api-client:google-api-client-android:1.20.0'
+    compile 'com.google.http-client:google-http-client-gson:1.20.0'
+    compile 'com.google.apis:google-api-services-drive:v2-rev181-1.20.0'
+    compile 'org.achartengine:achartengine:1.2.0'
+    compile 'net.sf.trove4j:trove4j:3.0.3'
+    compile 'org.scala-saddle:google-rfc-2445:20110304'
+    compile 'com.google.android.gms:play-services-ads:9.4.0'
+    compile 'com.google.android.gms:play-services-auth:9.4.0'
+    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    compile 'org.apache.httpcomponents:httpcore:4.4.1'
+    compile 'org.apache.httpcomponents:httpclient:4.5'
+}

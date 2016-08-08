@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ru.orangesoftware.financisto.fragments.AccountListFragment">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="fill_parent" android:layout_width="fill_parent"
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/accountsList"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <TextView android:id="@+id/accountsListStartText"
+            android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:layout_weight="1" android:gravity="center" android:text="@string/no_accounts" />
+        <TextView android:id="@+id/integrity_error"
+            android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:gravity="center" android:text="@string/integrity_error"
+            android:background="#FF0000" android:textColor="#FFFFFF" android:padding="3dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+    
+</FrameLayout>

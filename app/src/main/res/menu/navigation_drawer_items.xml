@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ru.orangesoftware.financisto.activity.MainActivity">
+
+    <group android:id="@+id/group_navigation" android:checkableBehavior="single">
+        <item
+            android:id="@+id/accounts"
+            android:icon="@drawable/ic_tab_accounts"
+            android:title="@string/accounts" />
+
+        <item
+            android:id="@+id/blotter"
+            android:icon="@drawable/ic_tab_blotter"
+            android:title="@string/blotter" />
+
+        <item
+            android:id="@+id/scheduled_transactions"
+            android:icon="@drawable/ic_menu_today"
+            android:title="@string/scheduled_transactions">
+        </item>
+
+        <item
+            android:id="@+id/budgets"
+            android:icon="@drawable/ic_tab_budgets"
+            android:title="@string/budgets" />
+
+        <item
+            android:id="@+id/reports"
+            android:icon="@drawable/ic_tab_reports"
+            android:title="@string/reports" />
+
+        <item
+            android:id="@+id/planner"
+            android:title="@string/planner" />
+    </group>
+
+    <group android:id="@+id/group_operations" android:checkableBehavior="none">
+        <item
+            android:id="@+id/menu_sync_online"
+            android:title="@string/sync_online"
+            android:icon="@drawable/ic_menu_refresh"
+            app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/menu_mass_operations"
+            android:title="@string/mass_operations"
+            android:icon="@drawable/ic_menu_agenda"/>
+    </group>
+
+    <group android:id="@+id/group_database" android:checkableBehavior="none">
+        <item
+            android:id="@+id/menu_restore_database"
+            android:title="@string/restore_database" />
+        <item
+            android:id="@+id/menu_backup_database"
+            android:title="@string/backup_database"
+            android:icon="@drawable/ic_menu_upload"
+            app:showAsAction="ifRoom"/>
+        <item
+            android:id="@+id/menu_backup_database_to"
+            android:title="@string/backup_database_to" />
+        <item
+            android:id="@+id/menu_backup_restore_database_online"
+            android:title="@string/backup_restore_database_online" />
+
+        <item
+            android:id="@+id/menu_import_export"
+            android:title="@string/import_export" />
+    </group>
+
+    <group android:id="@+id/group_settings" android:checkableBehavior="none">
+        <item
+            android:id="@+id/entities"
+            android:icon="@drawable/menu_entities"
+            android:title="@string/entities" />
+        <item android:id="@+id/menu_settings" android:title="@string/preferences"
+            android:icon="@drawable/ic_action_settings"/>
+        <item
+            android:id="@+id/menu_integrity_fix"
+            android:title="@string/integrity_fix" />
+        <item android:id="@+id/menu_donate" android:title="@string/donate"/>
+        <item android:id="@+id/menu_about" android:title="@string/about"/>
+    </group>
+</menu>

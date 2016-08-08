@@ -1,0 +1,1 @@
+ALTER TABLE payee ADD COLUMN sms_payee_name text;

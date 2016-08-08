@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (c) 2010 Denis Solonenko.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the GNU Public License v2.0
+  which accompanies this distribution, and is available at
+  http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+  
+  Contributors:
+      Denis Solonenko - initial API and implementation
+-->
+<resources>
+	<!--
+            This is the styled theme.
+
+            It extends from Theme.AppCompat.Light, but it could extend from any of
+            the Theme.AppCompat themes depending on your color scheme. This theme can be applied to
+            your application or individual activities in the AndroidManifest.xml. In this sample it is
+            set on the application.
+
+            This differs from the version of this theme in 'res/values-v14', as not all of the
+            necessary attributes are available in the android: namespace on older versions of Android.
+            This means that for certain attributes we must set the attributes provided in
+            ActionBarCompat's namespace instead.
+        -->
+
+	<style name="Theme.Styled" parent="Theme.AppCompat">
+		<!-- Main theme colors -->
+		<!--todo customize-->
+		<!--   your app branding color for the app bar -->
+		<!--<item name="android:colorPrimary">@color/primary</item>-->
+		<!--   darker variant for the status bar and contextual app bars -->
+		<!--<item name="android:colorPrimaryDark">@color/primary_dark</item>-->
+		<!--   theme UI controls like checkboxes and text fields -->
+		<!--<item name="android:colorAccent">@color/accent</item>-->
+
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+		<!--<item name="android:windowActionBarOverlay">true</item>-->
+		<!--<item name="actionBarItemBackground">@drawable/selectable_background</item>-->
+		<!--<item name="actionBarTabStyle">@style/Widget.Styled.ActionBar.TabView</item>-->
+		<!--<item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>-->
+		<!--<item name="actionDropDownStyle">@style/Widget.Styled.Spinner.DropDown.ActionBar</item>-->
+		<!--<item name="dropDownListViewStyle">@style/Widget.Styled.ListView.DropDown</item>-->
+		<!--<item name="popupMenuStyle">@style/Widget.Styled.PopupMenu</item>-->
+	</style>
+
+	<!--<style name="Widget.Styled.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">-->
+		<!--<item name="background">@drawable/ab_solid_styled</item>-->
+		<!--<item name="backgroundStacked">@drawable/ab_stacked_solid_styled</item>-->
+		<!--<item name="backgroundSplit">@drawable/ab_bottom_solid_styled</item>-->
+		<!--<item name="progressBarStyle">@style/Widget.Styled.ProgressBar.Horizontal</item>-->
+	<!--</style>-->
+
+	<style name="Widget.Styled.TabLayout" parent="Widget.Design.TabLayout">
+		<!--<item name="tabMaxWidth">@dimen/tab_max_width</item>-->
+		<item name="tabIndicatorColor">?attr/colorAccent</item>
+		<item name="tabIndicatorHeight">2dp</item>
+		<!--<item name="tabPaddingStart">12dp</item>-->
+		<!--<item name="tabPaddingEnd">12dp</item>-->
+		<item name="tabBackground">?attr/selectableItemBackground</item>
+		<item name="tabTextAppearance">@style/TextAppearance.Styled.Design.Tab</item>
+		<item name="tabSelectedTextColor">?android:textColorPrimary</item>
+	</style>
+	<style name="TextAppearance.Styled.Design.Tab" parent="TextAppearance.Design.Tab">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">?android:textColorSecondary</item>
+		<item name="textAllCaps">false</item>
+	</style>
+
+	<!--
+        For the following styles, the attributes are available in the android namespace which
+        means that we can set them here for all platforms (v7 through to the latest).
+    -->
+
+	<!--<style name="Widget.Styled.ActionBar.TabView"-->
+		<!--parent="@style/Widget.AppCompat.Light.ActionBar.TabView">-->
+		<!--<item name="android:background">@drawable/tab_indicator_ab</item>-->
+	<!--</style>-->
+
+	<!--<style name="Widget.Styled.Spinner.DropDown.ActionBar"-->
+		<!--parent="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar">-->
+		<!--<item name="android:background">@drawable/spinner_background_ab</item>-->
+		<!--<item name="android:popupBackground">@drawable/menu_dropdown_panel_styled</item>-->
+		<!--<item name="android:dropDownSelector">@drawable/selectable_background</item>-->
+	<!--</style>-->
+
+	<!--<style name="Widget.Styled.ProgressBar.Horizontal"-->
+		<!--parent="@style/Widget.AppCompat.ProgressBar.Horizontal">-->
+		<!--<item name="android:progressDrawable">@drawable/progress_horizontal</item>-->
+	<!--</style>-->
+
+	<!--<style name="Widget.Styled.PopupMenu" parent="@style/Widget.AppCompat.Light.PopupMenu">-->
+		<!--<item name="android:popupBackground">@drawable/menu_dropdown_panel_styled</item>-->
+	<!--</style>-->
+
+	<!--<style name="Widget.Styled.ListView.DropDown"-->
+		<!--parent="@style/Widget.AppCompat.Light.ListView.DropDown">-->
+		<!--<item name="android:listSelector">@drawable/selectable_background</item>-->
+	<!--</style>-->
+
+
+	<!--Other styles-->
+	<style name="CupcakeDialog" parent="android:Theme.Dialog">
+    	<item name="android:windowAnimationStyle">@null</item>
+    </style>
+	<style name="TextAppearance" parent="android:TextAppearance.Small">
+		<item name="android:textStyle">normal</item>
+		<item name="android:antialias">true</item>
+		<item name="android:textColor">#FF000000</item>
+	</style>
+    <style name="TextAppearance.ZeroAmount">
+        <item name="android:textColor">@android:color/secondary_text_dark</item>
+    </style>
+	<style name="TextAppearance.PositiveAmount" parent="android:TextAppearance.Small">
+		<item name="android:textColor">#39b54a</item>
+	</style>
+	<style name="TextAppearance.NegativeAmount" parent="android:TextAppearance.Small">
+		<item name="android:textColor">#f26522</item>
+	</style>
+    <style name="TextAppearance.BalanceAmount">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#737373</item>
+    </style>
+	<style name="MinusButton">
+		<item name="android:background">@drawable/btn_circle</item>
+		<item name="android:src">@drawable/ic_btn_round_minus</item>
+	</style>
+	<style name="PlusButton">
+		<item name="android:background">@drawable/btn_circle</item>
+		<item name="android:src">@drawable/ic_btn_round_plus</item>
+	</style>
+	<style name="MoreButton">
+		<item name="android:background">@drawable/btn_circle</item>
+		<item name="android:src">@drawable/ic_btn_round_more</item>
+	</style>
+    <style name="SplitButton">
+        <item name="android:background">@drawable/btn_circle</item>
+        <item name="android:src">@drawable/ic_btn_round_split</item>
+    </style>
+	<style name="UpButton">
+		<item name="android:background">@drawable/btn_circle</item>
+		<item name="android:src">@drawable/ic_btn_round_up</item>
+	</style>
+	<style name="DownButton">
+		<item name="android:background">@drawable/btn_circle</item>
+		<item name="android:src">@drawable/ic_btn_round_down</item>
+	</style>
+	<style name="TopButton">
+		<item name="android:background">@drawable/btn_circle</item>
+		<item name="android:src">@drawable/ic_btn_round_top</item>
+	</style>
+	<style name="BottomButton">
+		<item name="android:background">@drawable/btn_circle</item>
+		<item name="android:src">@drawable/ic_btn_round_bottom</item>
+	</style>
+    <style name="UpDownButton">
+        <item name="android:background">@drawable/btn_circle</item>
+        <item name="android:src">@drawable/ic_btn_round_updown</item>
+    </style>
+    <style name="CalcButton">
+        <item name="android:background">@drawable/btn_circle</item>
+        <item name="android:src">@drawable/ic_btn_round_calc</item>
+    </style>
+	<style name="TallTitleBarTheme" parent="android:Theme.NoTitleBar">
+		<item name="android:windowContentOverlay">@null</item>
+	</style>
+	<style name="ButtonBar"> 
+		<item name="android:paddingTop">5dip</item> 
+		<item name="android:paddingLeft">4dip</item> 
+		<item name="android:paddingRight">4dip</item> 
+		<item name="android:paddingBottom">1dip</item> 
+		<item name="android:background">@android:drawable/bottom_bar</item> 
+	</style>	
+	<style name="ProgressBarBudget" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_budget</item>
+        <item name="android:minHeight">12dip</item>
+        <item name="android:maxHeight">12dip</item>
+    </style>
+</resources>

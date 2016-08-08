@@ -1,0 +1,1 @@
+ALTER TABLE account ADD COLUMN savings_account_id integer null;

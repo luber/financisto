@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item android:id="@+id/opt_menu_transfer"
+		android:icon="@drawable/ic_input_transfer"
+		android:title="@string/add_transfer"
+		app:showAsAction="ifRoom"/>
+	<item android:id="@+id/opt_menu_templates"
+		android:icon="@drawable/ic_input_templates"
+		android:title="@string/transaction_templates"
+		app:showAsAction="ifRoom"/>
+	<item android:id="@+id/opt_menu_filter"
+		android:icon="@drawable/ic_menu_filter_off"
+		android:title="@string/filter"
+		app:showAsAction="always"/>
+	<item android:id="@+id/opt_menu_month"
+		android:icon="@drawable/ic_menu_calendar_off"
+		android:title="@string/monthly_view"
+		app:showAsAction="ifRoom"/>
+	<item android:id="@+id/opt_menu_bill"
+		android:icon="@drawable/ic_menu_bill_off"
+		android:title="@string/ccard_statement"
+		app:showAsAction="ifRoom"/>
+</menu>
