@@ -147,8 +147,8 @@
                 <action android:name="ru.orangesoftware.financisto.ACTION_SCHEDULE_AUTO_BACKUP" />
                 <action android:name="ru.orangesoftware.financisto.ACTION_AUTO_BACKUP" />
                 <!--<action android:name="ru.orangesoftware.financisto.ACTION_CREATE_FROM_SMS" />-->
-                <action android:name="ru.orangesoftware.financisto.ACTION_SCHEDULE_AUTO_SYNC" />
-                <action android:name="ru.orangesoftware.financisto.ACTION_AUTO_SYNC" />
+                <!--<action android:name="ru.orangesoftware.financisto.ACTION_SCHEDULE_AUTO_SYNC" />-->
+                <!--<action android:name="ru.orangesoftware.financisto.ACTION_AUTO_SYNC" />-->
             </intent-filter>
         </service>
 

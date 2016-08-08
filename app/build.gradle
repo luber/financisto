@@ -24,10 +24,6 @@ android {
 }
 
 dependencies {
-    //    compile 'com.android.support:support-v4:21.0.0'
-    //    compile 'commons-logging:commons-logging:1.2'
-    //    compile 'com.dropbox.core:dropbox-core-sdk:1.7.7'
-//    compile files('libs/dropbox-android-sdk-1.6.3.jar')
     compile files('libs/json_simple-1.1 2.jar')
     compile files('libs/cwac-wakeful-1.0.5.jar')
     compile 'com.android.support:multidex:1.0.1'
