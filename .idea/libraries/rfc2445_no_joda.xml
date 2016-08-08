@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="rfc2445-no-joda">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/Financisto/libs/google-rfc-2445/rfc2445-no-joda.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

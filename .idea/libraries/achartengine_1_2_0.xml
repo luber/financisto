@@ -1,11 +1,7 @@
 <component name="libraryTable">
   <library name="achartengine-1.2.0">
     <CLASSES>
-<<<<<<< HEAD
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.achartengine/achartengine/1.2.0/38e83ec1727ca5d20ad5f9dd7fcc7e869f38d9ba/achartengine-1.2.0.jar!/" />
-=======
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.achartengine/achartengine/1.2.0/5bbb4efdec3435b8fdb3807d586db0aa36f8a7b3/achartengine-1.2.0.jar!/" />
->>>>>>> b4ed8a299a4674201ecba2c0033cb2d1c9cef36a
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.achartengine/achartengine/1.2.0/999e1889f239382eb903bcce45bca8832fabb38/achartengine-1.2.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
