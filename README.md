@@ -1,6 +1,10 @@
 The purpouse of this branch to develop the Dashboard view (and allow user to set it as start view via settings). The Dashboard view should be similar to this: https://play.google.com/store/apps/details?id=ru.easyfinance.budget
 
-**! Please note that the branch is currently UNSTABLE due to migrating to Holo !**
+# Changes from original version
+1. Removed Dropbox support
+2. Redesigned some screens to Fragments instead of Activities
+3. Changed design to Material
+4. Added posibility to parse data from sms sent by Privatbank
 
 # Financisto
 
