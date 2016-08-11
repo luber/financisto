@@ -424,6 +424,7 @@ public class MainActivity extends AppCompatActivity implements
                 selectedAccountId = -1;
                 android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_content_frame, AccountListFragment.newInstance());
+//                fragmentTransaction.addToBackStack(null); //TODO: start screen should not be added to the backstack
                 fragmentTransaction.commit();
 
                 fab.show();
@@ -431,6 +432,7 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.blotter:
                 android.support.v4.app.FragmentTransaction blotterFragmentTransaction = getSupportFragmentManager().beginTransaction();
                 blotterFragmentTransaction.replace(R.id.main_content_frame, BlotterFragment.newInstance(true, selectedAccountId));
+                blotterFragmentTransaction.addToBackStack(null);
                 blotterFragmentTransaction.commit();
 
                 fab.show();
@@ -441,6 +443,7 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.budgets:
                 android.support.v4.app.FragmentTransaction budgetFragmentTransaction = getSupportFragmentManager().beginTransaction();
                 budgetFragmentTransaction.replace(R.id.main_content_frame, new BudgetListFragment());
+                budgetFragmentTransaction.addToBackStack(null);
                 budgetFragmentTransaction.commit();
 
                 fab.show();
@@ -448,6 +451,7 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.reports:
                 android.support.v4.app.FragmentTransaction reportsFragmentTransaction = getSupportFragmentManager().beginTransaction();
                 reportsFragmentTransaction.replace(R.id.main_content_frame, new ReportListFragment());
+                reportsFragmentTransaction.addToBackStack(null);
                 reportsFragmentTransaction.commit();
 
                 fab.hide();
