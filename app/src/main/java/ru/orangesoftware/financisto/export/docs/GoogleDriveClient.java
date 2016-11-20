@@ -74,17 +74,18 @@ public class GoogleDriveClient {
     public static String getOrCreateDriveFolder(Drive drive, String targetFolder) throws IOException {
         String folderId = null;
         FileList folders = drive.files().list().setQ("mimeType='application/vnd.google-apps.folder'").execute();
-        for (com.google.api.services.drive.model.File f : folders.getItems()) {
-            if (f.getTitle().equals(targetFolder)) {
+        for (com.google.api.services.drive.model.File f : folders.getFiles()) {
+            if (f.getName().equals(targetFolder)) {
                 folderId = f.getId();
             }
         }
         //if not found create it
         if (folderId == null) {
             com.google.api.services.drive.model.File body = new com.google.api.services.drive.model.File();
-            body.setTitle(targetFolder);
+            body.setName(targetFolder);
             body.setMimeType("application/vnd.google-apps.folder");
-            com.google.api.services.drive.model.File file = drive.files().insert(body).execute();
+
+            com.google.api.services.drive.model.File file = drive.files().create(body).execute();
             folderId = file.getId();
         }
         return folderId;

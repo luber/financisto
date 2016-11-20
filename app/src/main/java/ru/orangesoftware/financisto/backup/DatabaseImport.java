@@ -48,7 +48,7 @@ public class DatabaseImport extends FullDatabaseImport {
 
     public static DatabaseImport createFromGoogleDriveBackup(Context context, DatabaseAdapter dbAdapter, Drive drive, com.google.api.services.drive.model.File file)
             throws IOException {
-        HttpResponse response = drive.getRequestFactory().buildGetRequest(new GenericUrl(file.getDownloadUrl())).execute();
+        HttpResponse response = drive.getRequestFactory().buildGetRequest(new GenericUrl(file.getWebContentLink())).execute();
         InputStream inputStream = response.getContent();
         InputStream in = new GZIPInputStream(inputStream);
         return new DatabaseImport(context, dbAdapter, in);

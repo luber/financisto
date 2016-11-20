@@ -701,7 +701,7 @@ public class MainActivity extends AppCompatActivity implements
         int count = backupFiles.length;
         String[] titles = new String[count];
         for (int i = 0; i < count; i++) {
-            titles[i] = backupFiles[i].getTitle();
+            titles[i] = backupFiles[i].getName();
         }
         return titles;
     }

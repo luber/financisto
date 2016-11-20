@@ -16,7 +16,6 @@ import android.os.Environment;
 
 import com.google.api.client.http.InputStreamContent;
 import com.google.api.services.drive.Drive;
-import com.google.api.services.drive.model.ParentReference;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -100,13 +99,15 @@ public abstract class Export {
         mediaContent.setLength(outputStream.size());
         // File's metadata.
         com.google.api.services.drive.model.File body = new com.google.api.services.drive.model.File();
-        body.setTitle(fileName);
+        body.setName(fileName);
         body.setMimeType(BACKUP_MIME_TYPE);
-        body.setFileSize((long)outputStream.size());
-        List<ParentReference> parentReference = new ArrayList<ParentReference>();
-        parentReference.add(new ParentReference().setId(folderId)) ;
+        body.setSize((long)outputStream.size());
+
+        List<String> parentReference = new ArrayList<String>();
+        parentReference.add(folderId);
         body.setParents(parentReference);
-        com.google.api.services.drive.model.File file = drive.files().insert(body, mediaContent).execute();
+
+        com.google.api.services.drive.model.File file = drive.files().create(body, mediaContent).execute();
 
 		return fileName;
 	}

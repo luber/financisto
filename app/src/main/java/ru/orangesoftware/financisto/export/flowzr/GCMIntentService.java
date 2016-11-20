@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import ru.orangesoftware.financisto.export.flowzr.FlowzrSyncEngine;
+//import ru.orangesoftware.financisto.export.flowzr.FlowzrSyncEngine;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 /**
@@ -31,9 +31,9 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 	        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
 	        String messageType = gcm.getMessageType(intent);
 	        if (!extras.isEmpty()) {
-	        	if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {	    		
+	        	if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
 	        		Log.i(TAG,"starting sync from GCM");
-	    			FlowzrSyncEngine.builAndRun(getApplicationContext());
+//	    			FlowzrSyncEngine.builAndRun(getApplicationContext());
 	            }
 	        }
 	    }

@@ -223,7 +223,7 @@
                             android:title="@string/google_drive_backup_full_readonly"
                             android:summary="@string/google_drive_backup_full_readonly_summary"
                             android:defaultValue="false"/>
-        <EditTextPreference android:key="backup_folder"
+        <Preference android:key="backup_folder"
                             android:title="@string/backup_folder"
                             android:summary="@string/backup_folder_summary"/>
     </PreferenceCategory>

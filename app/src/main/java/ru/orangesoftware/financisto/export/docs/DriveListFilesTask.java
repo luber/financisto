@@ -58,8 +58,8 @@ public class DriveListFilesTask extends AsyncTask<Void, Void, File[]> {
 
             List<File> backupFiles = new ArrayList<File>();
             FileList files = drive.files().list().setQ("mimeType='" + Export.BACKUP_MIME_TYPE + "' and '" + folderId + "' in parents").execute();
-            for (com.google.api.services.drive.model.File f : files.getItems()) {
-                if ((f.getExplicitlyTrashed() == null || !f.getExplicitlyTrashed()) && f.getDownloadUrl() != null && f.getDownloadUrl().length() > 0) {
+            for (com.google.api.services.drive.model.File f : files.getFiles()) {
+                if ((f.getExplicitlyTrashed() == null || !f.getExplicitlyTrashed()) && f.getWebContentLink() != null && f.getWebContentLink().length() > 0) {
                     if (f.getFileExtension().equals("backup")) {
                         backupFiles.add(f);
                     }

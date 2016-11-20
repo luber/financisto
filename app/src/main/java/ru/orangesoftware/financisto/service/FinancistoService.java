@@ -22,8 +22,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import com.commonsware.cwac.wakeful.WakefulIntentService;
-import ru.orangesoftware.financisto.export.flowzr.FlowzrSyncEngine;
-import ru.orangesoftware.financisto.export.flowzr.FlowzrSyncOptions;
+//import ru.orangesoftware.financisto.export.flowzr.FlowzrSyncEngine;
+//import ru.orangesoftware.financisto.export.flowzr.FlowzrSyncOptions;
 
 import ru.orangesoftware.financisto.R;
 import ru.orangesoftware.financisto.activity.AbstractTransactionActivity;
@@ -133,18 +133,18 @@ public class FinancistoService extends WakefulIntentService {
     }
 
     private void doAutoSync() {
-    	try {
-    		Log.i(TAG, "Auto-sync started at " + new Date());
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);		
-			FlowzrSyncOptions o =FlowzrSyncOptions.fromPrefs(preferences);    		
-			if (isPushSyncNeed(o.last_sync_ts)) {
-				FlowzrSyncEngine.builAndRun(getApplicationContext());
-    		} else {
-				Log.i(TAG,"no changes to push since " + new Date(o.last_sync_ts).toString());
-			}
-    	} finally {
-    		scheduleNextAutoSync(this);
-    	}
+//    	try {
+//    		Log.i(TAG, "Auto-sync started at " + new Date());
+//			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//			FlowzrSyncOptions o =FlowzrSyncOptions.fromPrefs(preferences);
+//			if (isPushSyncNeed(o.last_sync_ts)) {
+//				FlowzrSyncEngine.builAndRun(getApplicationContext());
+//    		} else {
+//				Log.i(TAG,"no changes to push since " + new Date(o.last_sync_ts).toString());
+//			}
+//    	} finally {
+//    		scheduleNextAutoSync(this);
+//    	}
     }
     
     private boolean isPushSyncNeed(long lastSyncLocalTimestamp) {
