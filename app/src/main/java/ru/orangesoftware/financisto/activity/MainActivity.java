@@ -25,6 +25,8 @@ import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -208,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements
                 }
             });
         }
-
 //        setupFabSettingCurrentTab();
     }
 
@@ -343,6 +344,16 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if(fragmentManager.getBackStackEntryCount() > 1) {
+            fragmentManager.popBackStack();
+        } else {
+            finishAfterTransition();
+        }
+    }
+
     private void initialLoad() {
         long t3, t2, t1, t0 = System.currentTimeMillis();
         DatabaseAdapter db = new DatabaseAdapter(this);
@@ -415,6 +426,8 @@ public class MainActivity extends AppCompatActivity implements
             actionBar.setIcon(menuItem.getIcon());
         }
 
+        FragmentManager fm = getSupportFragmentManager();
+
         navMenuItemId = menuItem.getItemId();
         //Check to see which item was being clicked and perform appropriate action
         switch (navMenuItemId) {
@@ -422,16 +435,18 @@ public class MainActivity extends AppCompatActivity implements
             //Replacing the main content with ContentFragment Which is our Inbox View;
             case R.id.accounts:
                 selectedAccountId = -1;
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.main_content_frame, AccountListFragment.newInstance());
-//                fragmentTransaction.addToBackStack(null); //TODO: start screen should not be added to the backstack
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.main_content_frame, AccountListFragment.newInstance(), "accounts");
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
                 fab.show();
                 break;
             case R.id.blotter:
-                android.support.v4.app.FragmentTransaction blotterFragmentTransaction = getSupportFragmentManager().beginTransaction();
-                blotterFragmentTransaction.replace(R.id.main_content_frame, BlotterFragment.newInstance(true, selectedAccountId));
+                android.support.v4.app.FragmentTransaction blotterFragmentTransaction = fm.beginTransaction();
+                blotterFragmentTransaction.replace(R.id.main_content_frame, BlotterFragment.newInstance(true, selectedAccountId), "blotter");
+                blotterFragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 blotterFragmentTransaction.addToBackStack(null);
                 blotterFragmentTransaction.commit();
 
@@ -441,16 +456,18 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(new Intent(this, ScheduledListActivity.class));
                 break;
             case R.id.budgets:
-                android.support.v4.app.FragmentTransaction budgetFragmentTransaction = getSupportFragmentManager().beginTransaction();
+                android.support.v4.app.FragmentTransaction budgetFragmentTransaction = fm.beginTransaction();
                 budgetFragmentTransaction.replace(R.id.main_content_frame, new BudgetListFragment());
+                budgetFragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 budgetFragmentTransaction.addToBackStack(null);
                 budgetFragmentTransaction.commit();
 
                 fab.show();
                 break;
             case R.id.reports:
-                android.support.v4.app.FragmentTransaction reportsFragmentTransaction = getSupportFragmentManager().beginTransaction();
+                android.support.v4.app.FragmentTransaction reportsFragmentTransaction = fm.beginTransaction();
                 reportsFragmentTransaction.replace(R.id.main_content_frame, new ReportListFragment());
+                reportsFragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 reportsFragmentTransaction.addToBackStack(null);
                 reportsFragmentTransaction.commit();
 
@@ -517,6 +534,7 @@ public class MainActivity extends AppCompatActivity implements
                 break;
         }
 
+        fm.executePendingTransactions();
         return true;
     }
 

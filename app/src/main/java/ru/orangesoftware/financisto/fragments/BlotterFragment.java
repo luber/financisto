@@ -556,9 +556,10 @@ public class BlotterFragment extends ListFragment
     protected void addItem(int requestId, Class<? extends AbstractTransactionActivity> clazz) {
 //        Intent intent = new Intent(BlotterActivity.this, clazz);
         Intent intent = new Intent(mActivity, clazz);
-        long accountId = blotterFilter.getAccountId();
-        if (accountId != -1) {
-            intent.putExtra(TransactionActivity.ACCOUNT_ID_EXTRA, accountId);
+//        long accountId = blotterFilter.getAccountId();
+//        if (accountId != -1) {
+        if (forAccountId > 0){
+            intent.putExtra(TransactionActivity.ACCOUNT_ID_EXTRA, forAccountId);
         }
         intent.putExtra(TransactionActivity.TEMPLATE_EXTRA, blotterFilter.getIsTemplate());
         startActivityForResult(intent, requestId);

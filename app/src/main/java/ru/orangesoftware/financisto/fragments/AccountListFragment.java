@@ -216,6 +216,8 @@ public class AccountListFragment extends Fragment
     public void onResume() {
         super.onResume();
         if (enablePin) PinProtection.unlock(mActivity);
+
+        reloadData();
     }
 
     @Override
