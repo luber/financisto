@@ -349,6 +349,7 @@ public class MainActivity extends AppCompatActivity implements
         FragmentManager fragmentManager = getSupportFragmentManager();
         if(fragmentManager.getBackStackEntryCount() > 1) {
             fragmentManager.popBackStack();
+            mDrawerLayout.closeDrawers();
         } else {
             finishAfterTransition();
         }
