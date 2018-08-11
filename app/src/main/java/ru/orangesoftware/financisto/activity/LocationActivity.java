@@ -35,25 +35,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/*
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.OverlayItem;
-import com.google.android.maps.MapView.ReticleDrawMode;
+import com.google.android.maps.MapView.ReticleDrawMode;*/
 
-public class LocationActivity extends MapActivity {
-	
+//public class LocationActivity extends MapActivity {
+public class LocationActivity extends Activity {
+
 	public static final String LOCATION_ID_EXTRA = "locationId";
 	private static final int MENU_SATELLITE = Menu.FIRST+1;
 	private static final int MENU_MOVE_MARKER_TO_MAP_CENTER = Menu.FIRST+3;
 	private static final int MENU_GO_TO_MARKER = Menu.FIRST+4;
 
-	private MapView mapView;
-	private LocationOvelay locationOverlay;
-	private MyLocationOverlay myLocationOverlay;
+//	private MapView mapView;
+//	private LocationOvelay locationOverlay;
+//	private MyLocationOverlay myLocationOverlay;
 	private TextView location;
 	private Vibrator vibrator;
 	
@@ -73,7 +74,7 @@ public class LocationActivity extends MapActivity {
         em = db.em();
         
         vibrator = (Vibrator)getSystemService(Activity.VIBRATOR_SERVICE);
-        mapView = (MapView)findViewById(R.id.mapview);
+//        mapView = (MapView)findViewById(R.id.mapview);
         location = (TextView)findViewById(R.id.location);
                 
 		Intent intent = getIntent();
@@ -89,8 +90,9 @@ public class LocationActivity extends MapActivity {
 			}
 		}
         
-        mapView.setBuiltInZoomControls(true);
-        mapView.setReticleDrawMode(ReticleDrawMode.DRAW_RETICLE_OVER);
+//        mapView.setBuiltInZoomControls(true);
+//        mapView.setReticleDrawMode(ReticleDrawMode.DRAW_RETICLE_OVER);
+/*
         if (myLocation.id == -1) {
         	if (MyPreferences.isUseMyLocation(this)) {
 	        	new Handler().postDelayed(new Runnable(){
@@ -123,19 +125,23 @@ public class LocationActivity extends MapActivity {
         	GeoPoint point = new GeoPoint(lat, lon);
         	initializeLocationOverlay(point);
         }
-                  
+*/
+
         Button bOK = (Button)findViewById(R.id.okButton);
         bOK.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				EditText name = (EditText)findViewById(R.id.name);
+/*
 				if (Utils.checkEditText(name, "name", true, 100)) {
 					new SaveLocationTask().execute(Utils.text(name));
 				}
+*/
 			}
         });
     }
     
+/*
     private class SaveLocationTask extends AsyncTask<String, Integer, Void> {
 
 		@Override
@@ -214,6 +220,7 @@ public class LocationActivity extends MapActivity {
 		myLocationOverlay = null;
 		return point;
 	}    
+*/
 
 	@Override
 	protected void onDestroy() {
@@ -221,28 +228,30 @@ public class LocationActivity extends MapActivity {
 		super.onDestroy();
 	}
 
+/*
 	@Override
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
-	
+*/
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem menuItem = menu.add(0, MENU_SATELLITE, 0, 
-				mapView.isSatellite() ? R.string.satellite_off : R.string.satellite_on);
-		menuItem.setIcon(android.R.drawable.ic_menu_mapmode);
-		menuItem = menu.add(0, MENU_MOVE_MARKER_TO_MAP_CENTER, 0, R.string.move_marker_to_center);
-		menuItem.setIcon(R.drawable.ic_menu_goto);
-		menuItem = menu.add(0, MENU_GO_TO_MARKER, 0, R.string.move_go_to_marker);
-		menuItem.setIcon(android.R.drawable.ic_menu_revert);		
+//		MenuItem menuItem = menu.add(0, MENU_SATELLITE, 0,
+//				mapView.isSatellite() ? R.string.satellite_off : R.string.satellite_on);
+//		menuItem.setIcon(android.R.drawable.ic_menu_mapmode);
+//		menuItem = menu.add(0, MENU_MOVE_MARKER_TO_MAP_CENTER, 0, R.string.move_marker_to_center);
+//		menuItem.setIcon(R.drawable.ic_menu_goto);
+//		menuItem = menu.add(0, MENU_GO_TO_MARKER, 0, R.string.move_go_to_marker);
+//		menuItem.setIcon(android.R.drawable.ic_menu_revert);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		super.onOptionsItemSelected(item);
-		switch (item.getItemId()) {
+		/*switch (item.getItemId()) {
 		case MENU_SATELLITE:
 			if (mapView.isSatellite()) {
 				item.setTitle(R.string.satellite_on);
@@ -277,33 +286,36 @@ public class LocationActivity extends MapActivity {
 				}
 			}
 			break;
-		}
+		}*/
 		return false;
 	}
     
     @Override
     protected void onResume() {
         super.onResume();
+/*
         if (myLocationOverlay != null) {
         	myLocationOverlay.enableMyLocation();
         }
+*/
     }
 
     @Override
     protected void onStop() {
-    	if (myLocationOverlay != null) {
+/*    	if (myLocationOverlay != null) {
     		myLocationOverlay.disableMyLocation();
-    	}
+    	}*/
         super.onStop();
     }	
-    private class LocationItem extends OverlayItem {
+/*    private class LocationItem extends OverlayItem {
 
 		public LocationItem(GeoPoint point, String title, String snippet) {
 			super(point, title, snippet);
 		}
     	
-    }
+    }*/
     
+/*
     private class LocationOvelay extends ItemizedOverlay<LocationItem> {
 
     	private final int wd2, h;
@@ -367,5 +379,6 @@ public class LocationActivity extends MapActivity {
 		}
 		
     }
+*/
 
 }

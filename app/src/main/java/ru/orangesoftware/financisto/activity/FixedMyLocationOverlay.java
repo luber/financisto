@@ -19,12 +19,14 @@ import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 
+/*
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Projection;
+*/
 
-public class FixedMyLocationOverlay extends MyLocationOverlay {
+/*public class FixedMyLocationOverlay extends MyLocationOverlay {
 	private boolean bugged = false;
 
 	private Paint accuracyPaint;
@@ -89,4 +91,4 @@ public class FixedMyLocationOverlay extends MyLocationOverlay {
 		}
 	}
 
-}
+}*/
