@@ -12,10 +12,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/mainlayout" android:orientation="vertical"
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
-	<com.google.android.maps.MapView
-		android:id="@+id/mapview" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:clickable="true"
-		android:apiKey="0XB_zWHtLDQEIKFROoJYZFGCHklz4KiwWOsah5A" />
+	<!--<com.google.android.maps.MapView-->
+		<!--android:id="@+id/mapview" android:layout_width="fill_parent"-->
+		<!--android:layout_height="fill_parent" android:clickable="true"-->
+		<!--android:apiKey="0XB_zWHtLDQEIKFROoJYZFGCHklz4KiwWOsah5A" />-->
 		<!-- 0XB_zWHtLDQEIKFROoJYZFGCHklz4KiwWOsah5A release -->
 		<!--0XB_zWHtLDQHVkiL48eCDJDblk3PmKtiQ5ZLAtw debug -->
 	<LinearLayout android:layout_width="fill_parent"

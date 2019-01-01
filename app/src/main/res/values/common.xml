@@ -9,7 +9,7 @@
   Contributors:
 	  Denis Solonenko - initial API and implementation
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
 	<string name="app_name">Financisto</string>
 	<string name="app_description">Open-source personal budget manager</string>
 	<string name="about_copyright1">Released under GNU GPL v2</string>
