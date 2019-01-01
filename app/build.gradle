@@ -13,8 +13,8 @@ android {
         multiDexEnabled true
         testApplicationId "ru.orangesoftware.financisto.tests"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
-        versionCode 90
-        versionName '1.6.7'
+        versionCode 91
+        versionName '1.6.8'
     }
     buildTypes {
         release {
